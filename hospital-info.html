@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hospital Information</title>
+    <style>
+                /* Style for the body */
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+        }
+        
+        /* Style for the main heading */
+        h1 {
+          text-align: center;
+          font-size: 36px;
+          margin-top: 20px;
+        }
+
+        /* Style for the list of hospital information */
+        ul {
+          list-style: none;
+          margin: 0 auto;
+          max-width: 800px;
+          padding: 20px;
+        }
+
+        /* Style for each list item */
+        li {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          font-size: 20px;
+          padding: 10px 0;
+          border-bottom: 1px solid #ccc;
+        }
+
+        /* Style for the spans containing hospital data */
+        span {
+          font-weight: bold;
+        }
+
+        /* Style for the hospital name */
+        #hospitalName {
+          color: #0072c6;
+        }
+
+        /* Style for the hospital address */
+        #hospitalAddress {
+          white-space: pre-wrap;
+        }
+
+        /* Style for the contact information */
+        #contact {
+          font-size: 18px;
+        }
+
+        /* Style for the city and state */
+        #city,
+        #state {
+          text-transform: capitalize;
+        }
+        
+        .footer{
+            margin-top: 180px;
+            font-size: 12px;
+            text-align: center;
+            background: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <h1>Hospital Information</h1>
+          <ul>
+            <li>Hospital Name: <span id="hospitalName"></span></li>
+            <li>Total Hospital Beds: <span id="totalBeds"></span></li>
+            <li>Available Hospital Beds: <span id="availableBeds"></span></li>
+            <li>Unoccupied Beds: <span id="unoccupiedBeds"></span></li>
+            <li>Available ICU Beds: <span id="availableIcuBeds"></span></li>
+            <li>Hospital Address: <span id="hospitalAddress"></span></li>
+            <li>Contact: <span id="contact"></span></li>
+            <li>City: <span id="city"></span></li>
+            <li>State: <span id="state"></span></li>
+          </ul>
+    </div>
+    <h4 class="footer">&copy;2023 Developed by Sasikalyan. K</h4>
+</body>
+    <script>
+    // Retrieve the hospital data from sessionStorage
+    var hospitalData = JSON.parse(sessionStorage.getItem('hospitalData'));
+    
+    // Update the HTML elements with the hospital data
+    document.getElementById('hospitalName').textContent = hospitalData['Hospital Name'];
+    document.getElementById('totalBeds').textContent = hospitalData['Total Hospital Beds'];
+    document.getElementById('availableBeds').textContent = hospitalData['Available Hospital Beds'];
+    document.getElementById('unoccupiedBeds').textContent = hospitalData['Unoccupied Beds'];
+    document.getElementById('availableIcuBeds').textContent = hospitalData['Available ICU Beds'];
+    document.getElementById('hospitalAddress').textContent = hospitalData['Hospital Address'];
+    document.getElementById('contact').textContent = hospitalData['Contact'];
+    document.getElementById('city').textContent = hospitalData['City'];
+    document.getElementById('state').textContent = hospitalData['State'];
+  </script>
+</html>
