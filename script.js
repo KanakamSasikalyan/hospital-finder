@@ -8627,93 +8627,34 @@
 
 
 //======================================HOSPITAL LIST END======================================================
+  
 
-
-//======================================Get the Data Given In Input============================================
-  /*
-function getVal() {
+function getCityFilter() {
   const val = document.querySelector('input').value;
   return val;
 }
 
-
-function Display(){
-    window.location.href = "output.html";
-}
-
-var userLocation = getVal();
-console.log(userLocation)
-
-
-let filteredHospitals = hospitals.filter(hospital => hospital.City.toLowerCase().includes(userLocation.toLowerCase()));
-
-hospitalList = [];
-//Display the filtered hospitals
-filteredHospitals.forEach(hospital => hospitalList.push(hospital["Hospital Name"]));
-console.log(hospitalList);
-
-
-// Get a random hospital from the list
-var randomHospital = hospitals[Math.floor(Math.random() * hospitals.length)];
-
-// Store the selected hospital data in localStorage
-localStorage.setItem("selectedHospital", JSON.stringify(randomHospital));
-
-// Redirect to the new HTML page
-//window.location.href = "output.html";
-
-
-// Retrieve the selected hospital data from localStorage
-var selectedHospital = JSON.parse(localStorage.getItem("selectedHospital"));
-
-            // Display the selected hospital data in HTML
-document.getElementById("hospital-name").innerHTML = selectedHospital["Hospital Name"];
-document.getElementById("total-beds").innerHTML = selectedHospital["Total Hospital Beds"];
-document.getElementById("available-beds").innerHTML = selectedHospital["Available Hospital Beds"];
-document.getElementById("unoccupied-beds").innerHTML = selectedHospital["Unoccupied Beds"];
-document.getElementById("available-icu-beds").innerHTML = selectedHospital["Available ICU Beds"];
-document.getElementById("hospital-address").innerHTML = selectedHospital["Hospital Address"];
-document.getElementById("contact").innerHTML = selectedHospital["Contact"];
-document.getElementById("city").innerHTML = selectedHospital["City"];
-document.getElementById("state").innerHTML = selectedHospital["State"];
-
   
-function displayRandomHospital() {
-  // Select a random hospital from the hospitals array
-  const randomHospital = hospitals[Math.floor(Math.random() * hospitals.length)];
+var cityFilter = getCityFilter();
+console.log(cityFilter)
   
-  // Redirect to hospital.html and pass the selected hospital as a query parameter
-window.location.href = 'output.html?name=${randomHospital["Hospital Name"]}';
-}
+const filteredHospitals = hospitals.filter(hospital => hospital.City === cityFilter);
 
-
-// Get the selected hospital from the query parameter
-const urlParams = new URLSearchParams(window.location.search);
-const hospitalName = urlParams.get("name");
-
-// Find the selected hospital in the hospitals array
-const selectedHospital = hospitals.find(hospital => hospital["Hospital Name"] === hospitalName);
-
-// Display the selected hospital's data in the HTML
-document.getElementById("hospital-name").textContent = selectedHospital["Hospital Name"];
-document.getElementById("total-beds").textContent = selectedHospital["Total Hospital Beds"];
-document.getElementById("available-beds").textContent = selectedHospital["Available Hospital Beds"];
-document.getElementById("unoccupied-beds").textContent = selectedHospital["Unoccupied Beds"];
-document.getElementById("available-icu-beds").textContent = selectedHospital["Available ICU Beds"];
-document.getElementById("hospital-address").textContent = selectedHospital["Hospital Address"];
-document.getElementById("contact").textContent = selectedHospital["Contact"];
-document.getElementById("city").textContent = selectedHospital["City"];
-document.getElementById("state").textContent = selectedHospital["State"];
-*/
-  
+//console.log(filteredHospitals);
 
 
 function displayHospital() {
-      // Choose a random hospital from the array
-      window.location.href = 'hospital-info.html';
-      var randomIndex = Math.floor(Math.random() * hospitals.length);
-      var hospital = hospitals[randomIndex];
+if (filteredHospitals.length === 0) {
+    alert('No hospitals found for this city.');
+    return;
+  }
+  // Choose a random hospital from the array
+  var randomIndex = Math.floor(Math.random() * filteredHospitals.length);
+  var hospital = filteredHospitals[randomIndex];
       
-      // Store the hospital data in sessionStorage
-      sessionStorage.setItem('hospitalData', JSON.stringify(hospital));
+  // Store the hospital data in sessionStorage
+  sessionStorage.setItem('hospitalData', JSON.stringify(hospital));
+  
+  // Redirect to the hospital info page
+  window.location.href = 'hospital-info.html';
 }
