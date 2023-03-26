@@ -5,7 +5,7 @@
     <style>
                 /* Style for the body */
         body {
-          font-family: Arial, sans-serif;
+          font-family: Helvetica, sans-serif;
           margin: 0;
           padding: 0;
         }
@@ -54,6 +54,8 @@
         #contact {
           font-size: 18px;
         }
+        
+        
 
         /* Style for the city and state */
         #city,
@@ -61,12 +63,22 @@
           text-transform: capitalize;
         }
         
+        .maps {
+            width: 10%;
+            margin-top: 2%;
+            margin-left: 45%;
+            padding: 20px;
+        }
+        
+        .maps a{
+            margin-top: 3%;
+        }
+        
         .footer{
-            margin-top: 180px;
-            font-size: 12px;
+            margin-top: 70px;
+            font-size: 10px;
             text-align: center;
-            background: #000;
-            color: #fff;
+            color: #000;
         }
     </style>
 </head>
@@ -84,6 +96,8 @@
             <li>City: <span id="city"></span></li>
             <li>State: <span id="state"></span></li>
           </ul>
+            
+        <a class="maps" href="https://www.openstreetmap.org/#map=4/21.82/82.71">Open In Maps</a>
     </div>
     <h4 class="footer">&copy;2023 Developed by Sasikalyan. K</h4>
 </body>
