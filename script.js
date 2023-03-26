@@ -1,4 +1,4 @@
-  var hospitals = [
+var hospitals = [
     {
       "Hospital Name": "A.N. Beach Hospital",
       "Total Hospital Beds": 555,
@@ -8623,38 +8623,35 @@
   ]
 
 
+function testResults(form){
+    var cityFilter = form.inputbox.value;
+//    alert("You Typed:"+ filteredHospitals.length);
+    
+    if (confirm(cityFilter) == true) {
+        alert("You Are Redirecting to another Page");
+    } else {
+       return;
+    }
 
+    //filtered Hospitals
+    const filteredHospitals = hospitals.filter(hospital => hospital.City === cityFilter);
 
+    form.action = "hospital-info.html";
+    // Choose a random hospital from the array
+    var randomIndex = Math.floor(Math.random() * filteredHospitals.length);
+    var hospital = filteredHospitals[randomIndex];
 
-//======================================HOSPITAL LIST END======================================================
-  
-
-function getCityFilter() {
-  const val = document.querySelector('input').value;
-  return val;
+    // Store the hospital data in sessionStorage
+    sessionStorage.setItem('hospitalData', JSON.stringify(hospital));
+    form.inputBox.value = "";
 }
 
-  
-var cityFilter = getCityFilter();
-console.log(cityFilter)
-  
-const filteredHospitals = hospitals.filter(hospital => hospital.City === cityFilter);
-
-//console.log(filteredHospitals);
-
-
-function displayHospital() {
-if (filteredHospitals.length === 0) {
-    alert('No hospitals found for this city.');
-    return;
+window.addEventListener('pageshow', function(event) {
+  var historyTraversal = event.persisted || 
+                          (typeof window.performance != 'undefined' && 
+                           window.performance.navigation.type === 2);
+  if (historyTraversal) {
+    // Clear the search box here
+    document.getElementsByName('inputbox').value = '';
   }
-  // Choose a random hospital from the array
-  var randomIndex = Math.floor(Math.random() * filteredHospitals.length);
-  var hospital = filteredHospitals[randomIndex];
-      
-  // Store the hospital data in sessionStorage
-  sessionStorage.setItem('hospitalData', JSON.stringify(hospital));
-  
-  // Redirect to the hospital info page
-  window.location.href = 'hospital-info.html';
-}
+});
