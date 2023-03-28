@@ -8644,5 +8644,4 @@ function testResults(form){
 
     // Store the hospital data in sessionStorage
     sessionStorage.setItem('hospitalData', JSON.stringify(hospital));
-    form.inputBox.value = "";
 }
