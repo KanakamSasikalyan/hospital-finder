@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hospital Information</title>
+    <style>
+        /* Style for the body */
+        body {
+          font-family: Helvetica, sans-serif;
+          margin: 0;
+          padding: 0;
+        }
+        
+        /* Style for the main heading */
+        h1 {
+          text-align: center;
+          font-size: 36px;
+          margin-top: 20px;
+        }
+
+        /* Style for the list of hospital information */
+        ul {
+          list-style: none;
+          margin: 0 auto;
+          max-width: 800px;
+          padding: 20px;
+        }
+
+        /* Style for each list item */
+        li {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          font-size: 20px;
+          padding: 10px 0;
+          border-bottom: 1px solid #ccc;
+        }
+
+        /* Style for the spans containing hospital data */
+        span {
+          font-weight: bold;
+        }
+
+        /* Style for the hospital name */
+        #hospitalName {
+          color: #0072c6;
+        }
+
+        /* Style for the hospital address */
+        #hospitalAddress {
+          white-space: pre-wrap;
+        }
+
+        /* Style for the contact information */
+        #contact {
+          font-size: 18px;
+        }
+        
+        
+
+        /* Style for the city and state */
+        #city,
+        #state {
+          text-transform: capitalize;
+        }
+        
+        .maps {
+            width: 11%;
+            margin: 3% 45%;
+        }
+        
+        .maps a{
+            text-decoration: none;
+            text-align: center;
+            background: #000;
+            padding: 10px 30px;
+            color: #fff;
+            border-radius: 20px;
+        }
+        
+        .maps a:hover{
+            background: blue;
+            transition: 0.5s;
+        }
+    
+        .footer{
+            height: 10vh;
+            background: #000;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .footer p{
+            padding-top: 2%;
+            font-size: 12px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="info">
+        <h1>Hospital Information</h1>
+          <ul>
+            <li>Hospital Name: <span id="hospitalName"></span></li>
+            <li>Total Hospital Beds: <span id="totalBeds"></span></li>
+            <li>Available Hospital Beds: <span id="availableBeds"></span></li>
+            <li>Unoccupied Beds: <span id="unoccupiedBeds"></span></li>
+            <li>Available ICU Beds: <span id="availableIcuBeds"></span></li>
+            <li>Hospital Address: <span id="hospitalAddress"></span></li>
+            <li>Contact: <span id="contact"></span></li>
+            <li>City: <span id="city"></span></li>
+            <li>State: <span id="state"></span></li>
+          </ul>
+    </div> 
+    <div class="maps">
+        <a href="https://www.openstreetmap.org/#map=4/21.82/82.71">OpenStreetMaps</a>
+    </div>
+    <div class="footer">
+        <p>&copy;2023 Developed by Sasikalyan. K & Team</p>
+    </div>
+</body>
+    <script>
+    // Retrieve the hospital data from sessionStorage
+    var hospitalData = JSON.parse(sessionStorage.getItem('hospitalData'));
+    
+    // Update the HTML elements with the hospital data
+    document.getElementById('hospitalName').textContent = hospitalData['Hospital Name'];
+    document.getElementById('totalBeds').textContent = hospitalData['Total Hospital Beds'];
+    document.getElementById('availableBeds').textContent = hospitalData['Available Hospital Beds'];
+    document.getElementById('unoccupiedBeds').textContent = hospitalData['Unoccupied Beds'];
+    document.getElementById('availableIcuBeds').textContent = hospitalData['Available ICU Beds'];
+    document.getElementById('hospitalAddress').textContent = hospitalData['Hospital Address'];
+    document.getElementById('contact').textContent = hospitalData['Contact'];
+    document.getElementById('city').textContent = hospitalData['City'];
+    document.getElementById('state').textContent = hospitalData['State'];
+  </script>
+</html>

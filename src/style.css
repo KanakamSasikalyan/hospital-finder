@@ -1,0 +1,203 @@
+*{
+    margin: 0;
+    padding: 0;
+/*    font-family: 'Poppins', sans-serif;*/
+    font-family: Lato, sans-serif; 
+}
+
+.nav-bar{
+    height: 12vh;
+    width: 100%;
+    background: #1E90FF;
+}
+
+.nav-bar ul {
+    float: right;
+    list-style-type: none;
+}
+
+.nav-bar ul li{
+    float: left;
+    padding: 30px;
+    font-size: 14px;
+}
+
+.nav-bar ul li a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.search-box{
+    height: 58vh;
+    margin-top: 4%;
+    text-align: center;
+}
+
+.search-box h1{
+    padding-bottom: 4%;
+}
+
+
+/* Style the form container */
+.example {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+
+/* Style the search button */
+.example button[type=submit] {
+  width: 10%;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+/* Add hover effect to the search button */
+.example button[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Style the dropdown menu */
+.example select[name=city] {
+  width: 60%;
+  margin-left: 15%;
+  font-size: 16px;
+  border: none;
+  background-color: #D3D3D3;
+  border-radius: 5px;
+  padding: 15px;
+  margin-right: 10px;
+}
+
+/* Style the dropdown arrow */
+.example select[name=city]::-ms-expand {
+  display: none;
+}
+
+.example select[name=city]:hover {
+  background-color: #ddd;
+}
+
+.example select[name=city]:focus {
+  background-color: #fff;
+  outline: none;
+}
+
+
+/*
+form.example input[type=text]{
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 70%;
+    background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 9px;
+  background: #2196F3;
+  color: white;
+  font-size: 19px;
+  border: 1px solid grey;
+  border-sleft: none;
+  cursor: pointer;
+}
+*/
+
+
+/*======================================Footer======================================*/
+
+.main-footer{
+    height: 22vh;
+    background: #000;
+}
+
+.main-footer ul{
+    display: inline-block;
+    list-style-type: none;
+    margin-left: 18%;
+    margin-top: 1%;
+}
+
+.main-footer ul li{
+    padding: 5px;
+    font-size: 12px;
+}
+
+.main-footer ul li a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.main-footer p{
+    margin-top: 3%;
+    text-align: center;
+    color: #fff;
+    font-size: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
