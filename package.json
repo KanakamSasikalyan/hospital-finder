@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@tensorflow/tfjs": "^4.2.0",
-    "core-js": "^3.29.1"
-  }
-}
