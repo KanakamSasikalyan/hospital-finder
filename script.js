@@ -8625,10 +8625,10 @@ var hospitals = [
 
 function testResults(form){
     var cityFilter = document.getElementById("cityName").value;
-    alert(cityFilter);
+    alert("You Selected City: "+cityFilter);
 //    alert("You Typed:"+ filteredHospitals.length);
     
-    if (confirm(cityFilter) == true) {
+    if (confirm("Confirm Your City: "+cityFilter) == true) {
         alert("You Are Redirecting to another Page");
     } else {
        return;
