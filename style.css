@@ -1,8 +1,8 @@
 *{
     margin: 0;
     padding: 0;
-/*    font-family: 'Poppins', sans-serif;*/
-    font-family: Lato, sans-serif; 
+font-family: 'Poppins', sans-serif;
+/*    font-family: Lato, sans-serif; */
 }
 
 .nav-bar{
@@ -27,9 +27,15 @@
     color: #fff;
 }
 
+.nav-bar ul li a:hover{
+    color: #000000;
+    transition: 0.5s;
+    
+}
+
 .search-box{
     height: 58vh;
-    margin-top: 4%;
+    margin-top: 7%;
     text-align: center;
 }
 
@@ -141,63 +147,19 @@ form.example button {
 }
 
 .main-footer p{
-    margin-top: 3%;
+    margin-top: 2%;
     text-align: center;
     color: #fff;
     font-size: 10px;
 }
 
+.main-footer p a{
+    color: #fff;
+    text-decoration: none;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.main-footer p a:hover{
+    color: blue;
+    text-decoration: none;
+    transition: 0.5s;
+}
