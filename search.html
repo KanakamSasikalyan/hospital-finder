@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>OpenStreetMap Redirect</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+/*      font-family: Helvitica, sans-serif;*/
+        font-family: 'Poppins', sans-serif;
+    }
+    #map-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 50%;
+    }
+    #form-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 50%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+      padding: 50px;
+    }
+    form {
+      text-align: center;
+    }
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+      p{
+          font-size: 13px;
+          width: 70%;
+          margin-left: 20px;
+          text-justify: distribute;
+      }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid blue;
+      border-bottom: 2px solid blue;
+      margin-bottom: 20px;
+    }
+    button[type="submit"] {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+    }
+    button[type="submit"]:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div id="map-container">
+    <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-122.719,45.408,-122.628,45.458&amp;layer=mapnik&amp;marker=45.433,-122.673" style="border: 1px solid black"></iframe>
+  </div>
+  <div id="form-container">
+    <h1>Find a Location on OpenStreetMap</h1>
+    <p>To search for a place, address, or landmark on OpenStreetMap, simply enter its name in the search bar and click on the search button. The map will then display the location and provide information about the area, such as street names, buildings, and points of interest. With OpenStreetMap's detailed and up-to-date data, users can easily find their way around and discover new places.</p>
+    <form action="https://www.openstreetmap.org/search" method="get">
+      <input type="text" name="query" id="location" placeholder="Enter a location">
+      <button type="submit">Search</button>
+    </form>
+    <p>Note: This page uses the OpenStreetMap API to display maps and search for locations. For more information, visit <a href="https://www.openstreetmap.org">www.openstreetmap.org</a>.</p>
+    <script>
+      document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var location = document.getElementById('location').value;
+        window.location.href = 'https://www.openstreetmap.org/search?query=' + encodeURIComponent(location);
+      });
+    </script>
+  </div>
+</body>
+</html>
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hospital Finder</title>
+</head>
+<body>
+  <form>
+    <label for="location">Enter location:</label>
+    <input type="text" id="location" name="location"><br><br>
+    <button type="button" onclick="searchHospitals()">Search Hospitals</button>
+  </form>
+  <br>
+  <div id="results"></div>
+  
+  <script>
+    function searchHospitals() {
+      const location = document.getElementById("location").value;
+      const request = new XMLHttpRequest();
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=<YOUR_API_KEY>`;
+      
+      request.open('GET', url);
+      request.send();
+      
+      request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          const response = JSON.parse(this.responseText);
+          const lat = response.coord.lat;
+          const lon = response.coord.lon;
+          const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=<YOUR_API_KEY>`;
+          
+          request.open('GET', url);
+          request.send();
+          
+          request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              const response = JSON.parse(this.responseText);
+              const city = response.results[0].components.city;
+              const url = `https://api.foursquare.com/v2/venues/search?near=${city}&query=hospital&client_id=<YOUR_CLIENT_ID>&client_secret=<YOUR_CLIENT_SECRET>&v=20190425`;
+              
+              request.open('GET', url);
+              request.send();
+              
+              request.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                  const response = JSON.parse(this.responseText);
+                  const hospitals = response.response.venues;
+                  let resultHTML = "<h2>Results:</h2>";
+                  
+                  if (hospitals.length == 0) {
+                    resultHTML += "<p>No hospitals found.</p>";
+                  } else {
+                    hospitals.forEach(hospital => {
+                      resultHTML += `<p><strong>${hospital.name}</strong><br>${hospital.location.address}</p>`;
+                    });
+                  }
+                  
+                  document.getElementById("results").innerHTML = resultHTML;
+                }
+              };
+            }
+          };
+        }
+      };
+    }
+  </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hospital Search</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <label for="district">Enter District:</label>
+    <input type="text" id="district" name="district">
+    <button onclick="searchHospitals()">Search</button>
+    <br><br>
+    <div id="results"></div>
+    <script>
+      function searchHospitals() {
+        var district = document.getElementById("district").value;
+        axios.get('https://nominatim.openstreetmap.org/search?q=hospital+' + district + '&format=json&addressdetails=1&limit=10')
+          .then(function (response) {
+            var results = response.data;
+            var output = '';
+            if (results.length > 0) {
+              output += '<h2>Results:</h2>';
+              output += '<ul>';
+              for (var i = 0; i < results.length; i++) {
+                output += '<li>' + results[i].display_name + '</li>';
+              }
+              output += '</ul>';
+            } else {
+              output += '<p>No hospitals found in ' + district + '</p>';
+            }
+            document.getElementById('results').innerHTML = output;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    </script>
+  </body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OpenStreetMap Example</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
+</head>
+<body>
+	<div id="mapid" style="height: 500px;"></div>
+
+	<script>
+		var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			maxZoom: 18,
+		}).addTo(mymap);
+
+		var hospitalInput = prompt("Enter hospital name or address:");
+		var hospitalUrl = "https://nominatim.openstreetmap.org/search?q=" + hospitalInput + "&format=json";
+
+		fetch(hospitalUrl)
+			.then(response => response.json())
+			.then(data => {
+				var hospitalLat = data[0].lat;
+				var hospitalLon = data[0].lon;
+				L.marker([hospitalLat, hospitalLon]).addTo(mymap);
+			})
+			.catch(error => console.error(error));
+	</script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>OpenStreetMap Redirect</title>
+</head>
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px 0 0 5px;
+  border: 1px solid #ccc;
+  width: 300px;
+  min-width: 200px;
+}
+
+button[type="submit"] {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+</style>
+<body>
+  <h1>Enter a location:</h1>
+  <form action="https://www.openstreetmap.org/search" method="get">
+    <input type="text" name="query" id="location">
+    <button type="submit">Search</button>
+  </form>
+  <script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var location = document.getElementById('location').value;
+      window.location.href = 'https://www.openstreetmap.org/search?query=' + encodeURIComponent(location);
+    });
+  </script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>OpenStreetMap Redirect</title>
+  <style>
+    #map-container {
+      width: 50%;
+      height: 100vh;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+  <h1>Enter a location:</h1>
+  <form action="https://www.openstreetmap.org/search" method="get">
+    <input type="text" name="query" id="location">
+    <button type="submit">Search</button>
+  </form>
+  <div id="map-container">
+    <iframe id="map" src="https://www.openstreetmap.org/export/embed.html?bbox=-180,-90,180,90&amp;layer=mapnik"></iframe>
+  </div>
+  <script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var location = document.getElementById('location').value;
+      document.getElementById('map').src = 'https://www.openstreetmap.org/search?query=' + encodeURIComponent(location) + '#map=11/' + latitude + '/' + longitude;
+    });
+  </script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>OpenStreetMap Redirect</title>
+  <style>
+    <style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Helvitica, sans-serif;
+  }
+  #map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 50%;
+  }
+  #form-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  form {
+    text-align: center;
+  }
+  h1 {
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+  <div id="map-container">
+    <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-122.719,45.408,-122.628,45.458&amp;layer=mapnik&amp;marker=45.433,-122.673" style="border: 1px solid black"></iframe>
+  </div>
+  <div id="form-container">
+    <h1>OpenStreetMap Search and Location Viewer</h1>
+  <p>This page allows you to search for locations and view them on a map using OpenStreetMap.</p>
+    <form action="https://www.openstreetmap.org/search" method="get">
+      <input type="text" name="query" id="location">
+      <button type="submit">Search</button>
+    </form>
+    <script>
+      document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var location = document.getElementById('location').value;
+        window.location.href = 'https://www.openstreetmap.org/search?query=' + encodeURIComponent(location);
+      });
+    </script>
+  </div>
+</body>
+</html>
+-->
+
+
